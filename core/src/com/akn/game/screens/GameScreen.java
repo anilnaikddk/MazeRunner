@@ -20,15 +20,15 @@ public class GameScreen extends BasicScreen {
     private Table tableLayout;
 
     private PlayData playData;
-    private AnimationManager animationManager;
+    //    private AnimationManager animationManager;
     private LevelManager levelManager;
 
-    public GameScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens) {
-        super(camera, batch, viewport, screens);
+    public GameScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens, AnimationManager animationManager) {
+        super(camera, batch, viewport, screens, animationManager);
 
         playData = new PlayData();
 //        levelManager = new LevelManager(Constants.initialCols,Constants.initialRows,PlayData.characterImageName);
-        animationManager = new AnimationManager();
+//        animationManager = new AnimationManager();
 
         setupStage();
 //        setInputProcessor();
@@ -48,7 +48,7 @@ public class GameScreen extends BasicScreen {
         levelManager = new LevelManager(tableLayout);
     }
 
-    private void setInputProcessor(){
+    private void setInputProcessor() {
         InputMultiplexer im = new InputMultiplexer();
         InputManager inputManager = new InputManager(levelManager);
         GestureDetector gd = new GestureDetector(inputManager);
@@ -97,10 +97,12 @@ public class GameScreen extends BasicScreen {
     }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
     public void dispose() {
@@ -110,7 +112,7 @@ public class GameScreen extends BasicScreen {
         Gdx.app.log(this.getClass().getSimpleName(), "Disposing");
     }
 
-    public LevelManager getLevelManager(){
+    public LevelManager getLevelManager() {
         return levelManager;
     }
 }

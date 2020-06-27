@@ -1,5 +1,8 @@
 package com.akn.game.screens;
 
+import com.akn.game.data.PlayData;
+import com.akn.game.entities.WelcomeScreenRunner;
+import com.akn.game.managers.AnimationManager;
 import com.akn.game.managers.FontManager;
 import com.akn.game.managers.ScreenManager;
 import com.akn.game.utils.Dimension;
@@ -29,8 +32,8 @@ public class WelcomeScreen extends BasicScreen {
 
     private boolean playButtonPressed = false;
 
-    public WelcomeScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens) {
-        super(camera,batch,viewport,screens);
+    public WelcomeScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens, AnimationManager animationManager) {
+        super(camera, batch, viewport, screens, animationManager);
         fontManager = new FontManager();
         noRows = 12;
         rowHeight = HEIGHT / noRows;
@@ -40,7 +43,7 @@ public class WelcomeScreen extends BasicScreen {
         table.setFillParent(true);
         setupFontAndStyle(table);
         stage.addActor(table);
-//        stage.setDebugAll(true);
+        stage.setDebugAll(true);
     }
 
     private void setupFontAndStyle(Table table) {
@@ -52,7 +55,7 @@ public class WelcomeScreen extends BasicScreen {
         Texture playButtonTexture = new Texture(Gdx.files.internal("ui/play.png"));
         playButtonTexture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         Image playButton = new Image(playButtonTexture);
-        Dimension fitDim = getFactoredDimension(playButtonTexture.getWidth(),playButtonTexture.getHeight(),WIDTH / 3,rowHeight*2);
+        Dimension fitDim = getFactoredDimension(playButtonTexture.getWidth(), playButtonTexture.getHeight(), WIDTH / 3, rowHeight * 2);
         playButton.setSize(fitDim.WIDTH, fitDim.HEIGHT);
         playButton.addListener(new InputListener() {
             @Override
@@ -62,8 +65,15 @@ public class WelcomeScreen extends BasicScreen {
             }
         });
 
-        table.top().add(mainTitleLabel).padTop(rowHeight * 4).row();
-        table.add(playButton).size(playButton.getWidth(),playButton.getHeight()).padTop(rowHeight);
+        WelcomeScreenRunner runner = new WelcomeScreenRunner(animationManager, PlayData.characterImageName);
+        float animWidth = animationManager.getSprite(PlayData.characterImageName,2,0).getWidth();
+        float animHeight = animationManager.getSprite(PlayData.characterImageName,2,0).getHeight();
+        fitDim = getFactoredDimension(animWidth,animHeight,WIDTH / 5,rowHeight);
+        runner.setBounds(WIDTH / 2, rowHeight * 3, fitDim.WIDTH,fitDim.HEIGHT);
+        table.top().padTop(rowHeight * 3);
+        table.add(runner).row();
+        table.add(mainTitleLabel).row();
+        table.add(playButton).size(playButton.getWidth(), playButton.getHeight()).padTop(rowHeight);
 
     }
 
@@ -74,7 +84,7 @@ public class WelcomeScreen extends BasicScreen {
 
     @Override
     public void render(float delta) {
-        if(playButtonPressed){
+        if (playButtonPressed) {
             playButtonPressed = false;
             screens.showNewPlayScreen();
         }

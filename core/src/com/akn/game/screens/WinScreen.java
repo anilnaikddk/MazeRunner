@@ -92,7 +92,7 @@ public class WinScreen extends BasicScreen {
         fitDim = getFactoredDimension(nextTexture.getRegionWidth(), nextTexture.getRegionHeight(), WIDTH / colsNo, rowHeight * 2f);
         nextButton.setSize(fitDim.WIDTH, fitDim.HEIGHT);
 
-        menuButton.addListener(new InputListener(){
+        menuButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -103,7 +103,7 @@ public class WinScreen extends BasicScreen {
                 menuButtonPressed = true;
             }
         });
-        replayButton.addListener(new InputListener(){
+        replayButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;
@@ -114,7 +114,7 @@ public class WinScreen extends BasicScreen {
                 replayButtonPressed = true;
             }
         });
-        nextButton.addListener(new InputListener(){
+        nextButton.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 return true;

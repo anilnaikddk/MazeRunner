@@ -1,6 +1,7 @@
 package com.akn.game.screens;
 
 import com.akn.game.data.GraphicsData;
+import com.akn.game.managers.AnimationManager;
 import com.akn.game.managers.ScreenManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -15,11 +16,12 @@ public abstract class BasicScreen extends GraphicsData implements Screen {
     protected SpriteBatch batch;
     protected Viewport viewport;
     protected ScreenManager screens;
+    protected AnimationManager animationManager;
 
     protected final float WIDTH;
     protected final float HEIGHT;
 
-    public BasicScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens){
+    public BasicScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens) {
         this.camera = camera;
         this.batch = batch;
         this.viewport = viewport;
@@ -29,7 +31,12 @@ public abstract class BasicScreen extends GraphicsData implements Screen {
         HEIGHT = Gdx.graphics.getHeight();
     }
 
-    protected void clearScreen(){
+    public BasicScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens, AnimationManager animationManager) {
+        this(camera, batch, viewport, screens);
+        this.animationManager = animationManager;
+    }
+
+    protected void clearScreen() {
         Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
@@ -41,6 +48,6 @@ public abstract class BasicScreen extends GraphicsData implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width,height);
+        viewport.update(width, height);
     }
 }

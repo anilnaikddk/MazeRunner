@@ -16,6 +16,7 @@ public class ScreenManager implements Disposable {
     private OrthographicCamera camera;
     private SpriteBatch batch;
     private Viewport viewport;
+    private AnimationManager animationManager;
 
     private Main main;
 
@@ -28,15 +29,11 @@ public class ScreenManager implements Disposable {
         camera = new OrthographicCamera();
         batch = new SpriteBatch();
         viewport = new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+        animationManager = new AnimationManager();
 
         // initially add welcome screen
-        welcomeScreen = new WelcomeScreen(camera, batch, viewport, this);
+        welcomeScreen = new WelcomeScreen(camera, batch, viewport, this, animationManager);
         add(welcomeScreen);
-
-//       gameScreen = new GameScreen(camera,batch,viewport);
-//       gameScreen = new WelcomeScreen(camera,batch,viewport);
-//       gameScreen = new TableTest();
-//        gameScreen = new FontTest();
     }
 
     private void add(Screen screen) {
@@ -45,15 +42,15 @@ public class ScreenManager implements Disposable {
 
     public void showWelcomeScreen() {
         if (welcomeScreen == null) {
-            welcomeScreen = new WelcomeScreen(camera, batch, viewport, this);
+            welcomeScreen = new WelcomeScreen(camera, batch, viewport, this, animationManager);
         }
         add(welcomeScreen);
     }
 
     public void showNewPlayScreen() {
         if (gameScreen == null)
-            gameScreen = new GameScreen(camera, batch, viewport, this);
-        else{
+            gameScreen = new GameScreen(camera, batch, viewport, this, animationManager);
+        else {
             gameScreen.getLevelManager().increaseLevel();
         }
         add(gameScreen);
@@ -79,6 +76,7 @@ public class ScreenManager implements Disposable {
     @Override
     public void dispose() {
         batch.dispose();
+        animationManager.dispose();
         if (gameScreen != null)
             gameScreen.dispose();
         if (welcomeScreen != null)
