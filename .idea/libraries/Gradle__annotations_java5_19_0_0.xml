@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: annotations-java5-19.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations-java5/19.0.0/475a5aea56b94cb13acf3853e27636db4354cb1/annotations-java5-19.0.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations-java5/19.0.0/d432b450d516d5a1a19a80695a01d059a2ab905d/annotations-java5-19.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

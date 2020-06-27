@@ -1,0 +1,13 @@
+targetCompatibility = 1.8
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+dependencies {
+    implementation 'org.jetbrains:annotations-java5:19.0.0'
+    implementation "space.earlygrey:shapedrawer:$shapedrawerVersion"
+}
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+
+eclipse.project.name = appName + "-core"
