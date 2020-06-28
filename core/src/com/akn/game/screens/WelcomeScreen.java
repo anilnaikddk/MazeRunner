@@ -43,7 +43,7 @@ public class WelcomeScreen extends BasicScreen {
         table.setFillParent(true);
         setupFontAndStyle(table);
         stage.addActor(table);
-        stage.setDebugAll(true);
+//        stage.setDebugAll(true);
     }
 
     private void setupFontAndStyle(Table table) {
@@ -69,7 +69,7 @@ public class WelcomeScreen extends BasicScreen {
         float animWidth = animationManager.getSprite(PlayData.characterImageName,2,0).getWidth();
         float animHeight = animationManager.getSprite(PlayData.characterImageName,2,0).getHeight();
         fitDim = getFactoredDimension(animWidth,animHeight,WIDTH / 5,rowHeight);
-        runner.setBounds(WIDTH / 2, rowHeight * 3, fitDim.WIDTH,fitDim.HEIGHT);
+        runner.setBounds(WIDTH / 2, rowHeight * 3, fitDim.WIDTH * 1.3f,fitDim.HEIGHT * 1.3f);
         table.top().padTop(rowHeight * 3);
         table.add(runner).row();
         table.add(mainTitleLabel).row();

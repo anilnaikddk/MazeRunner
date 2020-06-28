@@ -1,6 +1,7 @@
 package com.akn.game.screens;
 
 import com.akn.game.data.GraphicsData;
+import com.akn.game.data.PlayData;
 import com.akn.game.managers.AnimationManager;
 import com.akn.game.managers.ScreenManager;
 import com.badlogic.gdx.Gdx;
@@ -17,6 +18,7 @@ public abstract class BasicScreen extends GraphicsData implements Screen {
     protected Viewport viewport;
     protected ScreenManager screens;
     protected AnimationManager animationManager;
+    protected PlayData playData;
 
     protected final float WIDTH;
     protected final float HEIGHT;
@@ -29,6 +31,8 @@ public abstract class BasicScreen extends GraphicsData implements Screen {
 
         WIDTH = Gdx.graphics.getWidth();
         HEIGHT = Gdx.graphics.getHeight();
+
+        playData = new PlayData();
     }
 
     public BasicScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens, AnimationManager animationManager) {

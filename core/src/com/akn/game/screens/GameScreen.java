@@ -1,6 +1,5 @@
 package com.akn.game.screens;
 
-import com.akn.game.data.PlayData;
 import com.akn.game.managers.AnimationManager;
 import com.akn.game.managers.InputManager;
 import com.akn.game.managers.LevelManager;
@@ -19,14 +18,13 @@ public class GameScreen extends BasicScreen {
     private Stage stage;
     private Table tableLayout;
 
-    private PlayData playData;
+//    private PlayData playData;
     //    private AnimationManager animationManager;
     private LevelManager levelManager;
 
     public GameScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens, AnimationManager animationManager) {
         super(camera, batch, viewport, screens, animationManager);
-
-        playData = new PlayData();
+//        playData = new PlayData();
 //        levelManager = new LevelManager(Constants.initialCols,Constants.initialRows,PlayData.characterImageName);
 //        animationManager = new AnimationManager();
 
