@@ -22,7 +22,7 @@ public class Ellers extends MazeGenerator {
     public void generateMaze() {
         int rowNo = 0;
         int cols = maze[0].length;
-        Set<Cell> cellSetArray[];
+        Set<Cell>[] cellSetArray;
         while (rowNo < maze.length){
             cellSetArray = new Set[cols];
         }

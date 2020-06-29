@@ -19,7 +19,7 @@ public class AnimationTest implements Screen {
         batch = new SpriteBatch();
 //        camera = new OrthographicCamera(new ScreenViewport());
         TextureAtlas atlas = new TextureAtlas(Gdx.files.internal("dog_jay.atlas"));
-        Sprite sprites[] = new Sprite[3];
+        Sprite[] sprites = new Sprite[3];
         for(int i = 0; i< 3; i++){
             sprites[i] = new Sprite(atlas.findRegion("up",i+1));
         }

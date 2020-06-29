@@ -9,7 +9,6 @@ public class FontManager {
 
     public enum TYPE {F1, F3, Default}
 
-    ;
     private final int defaultSize = 16;
     private final int defaultBorderWidth = 1;
     private final Color defaultFontColor = Color.WHITE;

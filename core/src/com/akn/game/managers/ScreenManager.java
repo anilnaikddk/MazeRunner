@@ -32,8 +32,12 @@ public class ScreenManager implements Disposable {
         animationManager = new AnimationManager();
 
         // initially add welcome screen
-        welcomeScreen = new WelcomeScreen(camera, batch, viewport, this, animationManager);
-        add(welcomeScreen);
+//        showWelcomeScreen();
+        showPlayScreen();
+//        welcomeScreen = new WelcomeScreen(camera, batch, viewport, this, animationManager);
+//        add(welcomeScreen);
+//        PixelArrayTest test = new PixelArrayTest(camera,batch,viewport,this);
+//        add(test);
     }
 
     private void add(Screen screen) {
@@ -47,7 +51,7 @@ public class ScreenManager implements Disposable {
         add(welcomeScreen);
     }
 
-    public void showNewPlayScreen() {
+    public void showPlayScreen() {
         if (gameScreen == null)
             gameScreen = new GameScreen(camera, batch, viewport, this, animationManager);
         else {

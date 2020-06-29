@@ -16,7 +16,7 @@ public class LevelManager extends GraphicsData implements Disposable {
 //    private final int gcdOfWH;
 //    private final float divideBy;
     public final float increaseBy = 0.4f;
-    private final float initialFactor = 5f;
+    private final float initialFactor = Constants.initialFactor;
     private int ROWS;
     private int COLS;
     private int originX;
@@ -33,7 +33,7 @@ public class LevelManager extends GraphicsData implements Disposable {
         this.characterName = characterName;
         originX = 0;
         originY = 0;
-        levelFactor = Constants.initialFactor;
+        levelFactor = initialFactor;
 //        DRAWABLE_WIDTH = Constants.WIDTH;
 //        DRAWABLE_HEIGHT = Constants.HEIGHT;
 //        gcdOfWH = Utils.gcd(DRAWABLE_WIDTH, DRAWABLE_HEIGHT);
@@ -44,7 +44,7 @@ public class LevelManager extends GraphicsData implements Disposable {
     public LevelManager(Table tableLayout) {
         super(tableLayout);
         characterName = PlayData.characterImageName;
-        levelFactor = Constants.initialFactor;
+        levelFactor = initialFactor;
         COLS = getColsFactored(initialFactor);
         ROWS = getRowsFactored(initialFactor);
         originX = (int) tableLayout.getPadLeft();
@@ -99,6 +99,7 @@ public class LevelManager extends GraphicsData implements Disposable {
     }
 
     private void createLevel() {
+        Gdx.app.log("Cols,Rows",COLS + "," + ROWS);
         level = new Level(COLS, ROWS, DRAWABLE_WIDTH, DRAWABLE_HEIGHT, originX, originY, characterName);
         newLevel = true;
     }

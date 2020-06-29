@@ -20,17 +20,17 @@ public abstract class BasicScreen extends GraphicsData implements Screen {
     protected AnimationManager animationManager;
     protected PlayData playData;
 
-    protected final float WIDTH;
-    protected final float HEIGHT;
+    protected final float WIDTH = Gdx.graphics.getWidth();
+    protected final float HEIGHT = Gdx.graphics.getHeight();
+
+    public BasicScreen(){
+    }
 
     public BasicScreen(OrthographicCamera camera, SpriteBatch batch, Viewport viewport, ScreenManager screens) {
         this.camera = camera;
         this.batch = batch;
         this.viewport = viewport;
         this.screens = screens;
-
-        WIDTH = Gdx.graphics.getWidth();
-        HEIGHT = Gdx.graphics.getHeight();
 
         playData = new PlayData();
     }
@@ -44,6 +44,15 @@ public abstract class BasicScreen extends GraphicsData implements Screen {
         Gdx.gl.glClearColor(0.3f, 0.3f, 0.3f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
+
+    @Override
+    public void pause() {}
+
+    @Override
+    public void resume() {}
+
+    @Override
+    public void show() {}
 
     @Override
     public void hide() {

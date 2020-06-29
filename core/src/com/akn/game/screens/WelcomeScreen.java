@@ -86,7 +86,7 @@ public class WelcomeScreen extends BasicScreen {
     public void render(float delta) {
         if (playButtonPressed) {
             playButtonPressed = false;
-            screens.showNewPlayScreen();
+            screens.showPlayScreen();
         }
         clearScreen();
 

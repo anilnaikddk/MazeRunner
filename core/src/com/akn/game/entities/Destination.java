@@ -22,7 +22,7 @@ public class Destination extends Image implements Disposable {
     private boolean finished = false;
     private PlayData playData;
 
-    private String imageNames[];
+    private String[] imageNames;
 
     public Destination(Cell cell) {
         this.cell = cell;

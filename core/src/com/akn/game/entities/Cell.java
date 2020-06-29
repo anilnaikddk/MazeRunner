@@ -11,12 +11,11 @@ import space.earlygrey.shapedrawer.ShapeDrawer;
 
 public class Cell {
 
-    public boolean UP_WALL = true;
-    public boolean DOWN_WALL = true;
     public boolean LEFT_WALL = true;
+    public boolean UP_WALL = true;
     public boolean RIGHT_WALL = true;
+    public boolean DOWN_WALL = true;
 
-    //    public int scale;
     public float width;
     public float height;
     public float x;
@@ -32,15 +31,12 @@ public class Cell {
     public Color lineColor = Color.WHITE;
 
     public Cell(int xi, int yi, float width, float height) {
-//        x = xi * scale;
-//        y = yi * scale;
         this.xi = xi;
         this.yi = yi;
         this.width = width;
         this.height = height;
         x = xi * width;
         y = yi * height;
-//        this.scale = scale;
     }
 
     public Cell(int xi, int yi, float width, float height, int originX, int originY) {
@@ -57,9 +53,6 @@ public class Cell {
         y = cell.y;
         originX = cell.originX;
         originY = cell.originY;
-//        scale = cell.scale;
-//        xi = cell.xi;
-//        yi = cell.yi;
         visited = cell.visited;
     }
 
@@ -102,16 +95,16 @@ public class Cell {
 //        renderer.rect(x + offset, y + offset, scale - offset * 2, scale - offset * 2);
     }
 
-    public boolean hasAnyUnvisitedNeighbourCell(Cell mazeGrid[][]) {
-        return isUnvisited(xi + 1, yi, mazeGrid)
-                || isUnvisited(xi, yi + 1, mazeGrid)
-                || isUnvisited(xi - 1, yi, mazeGrid)
-                || isUnvisited(xi, yi - 1, mazeGrid);
+    public boolean hasAnyUnvisitedNeighbourCell(Cell[][] mazeGrid) {
+        return isNeighbourUnvisited(xi + 1, yi, mazeGrid)
+                || isNeighbourUnvisited(xi, yi + 1, mazeGrid)
+                || isNeighbourUnvisited(xi - 1, yi, mazeGrid)
+                || isNeighbourUnvisited(xi, yi - 1, mazeGrid);
     }
 
-    private boolean isUnvisited(int x, int y, Cell grid[][]) {
+    private boolean isNeighbourUnvisited(int nX, int nY, Cell[][] grid) {
         try {
-            return grid[x][y].visited = !true;
+            return grid[nX][nY].visited = !true;
         } catch (ArrayIndexOutOfBoundsException e) {
             return false;
         } catch (NullPointerException e) {
@@ -119,18 +112,22 @@ public class Cell {
         }
     }
 
-    public ArrayList<Cell> getUnvisitedNeighbourCells(Cell grid[][]) {
+    public ArrayList<Cell> getUnvisitedNeighbourCells(Cell[][] grid) {
         ArrayList<Cell> n = new ArrayList<>();
-        if (isUnvisited(xi + 1, yi, grid)) {
+        // RIGHT
+        if (isNeighbourUnvisited(xi + 1, yi, grid)) {
             n.add(new Cell(xi + 1, yi, width, height, originX, originY));
         }
-        if (isUnvisited(xi, yi + 1, grid)) {
+        // UP
+        if (isNeighbourUnvisited(xi, yi + 1, grid)) {
             n.add(new Cell(xi, yi + 1, width, height, originX, originY));
         }
-        if (isUnvisited(xi - 1, yi, grid)) {
+        //LEFT
+        if (isNeighbourUnvisited(xi - 1, yi, grid)) {
             n.add(new Cell(xi - 1, yi, width, height, originX, originY));
         }
-        if (isUnvisited(xi, yi - 1, grid)) {
+        // DOWN
+        if (isNeighbourUnvisited(xi, yi - 1, grid)) {
             n.add(new Cell(xi, yi - 1, width, height, originX, originY));
         }
         return n;
@@ -149,25 +146,21 @@ public class Cell {
         return 3;
     }
 
-    public List<GridPoint2> getOpenSidesList() {
-        List<GridPoint2> pairs = new ArrayList<>();
+    public List<Cell> getNeighboursList(Cell[][] maze) {
+        List<Cell> list = new ArrayList<>();
         if (!LEFT_WALL) {
-//            pairs.add(new Pair(xi - 1, yi));
-            pairs.add(new GridPoint2(xi - 1, yi));
+            list.add(maze[xi - 1][yi]);
         }
         if (!UP_WALL) {
-//            pairs.add(new Pair(xi, yi + 1));
-            pairs.add(new GridPoint2(xi, yi + 1));
+            list.add(maze[xi][yi + 1]);
         }
         if (!RIGHT_WALL) {
-//            pairs.add(new Pair(xi + 1, yi));
-            pairs.add(new GridPoint2(xi + 1, yi));
+            list.add(maze[xi + 1][yi]);
         }
         if (!DOWN_WALL) {
-//            pairs.add(new Pair(xi, yi - 1));
-            pairs.add(new GridPoint2(xi, yi - 1));
+            list.add(maze[xi][yi - 1]);
         }
-        return pairs;
+        return list;
     }
 
     public int openWallCount() {
@@ -189,5 +182,10 @@ public class Cell {
 
     public void markAsVisited() {
         visited = true;
+    }
+
+    @Override
+    public String toString() {
+        return xi + "," + yi;
     }
 }

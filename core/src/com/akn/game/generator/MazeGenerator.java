@@ -11,7 +11,7 @@ import java.util.Stack;
 
 public abstract class MazeGenerator {
 
-    protected Cell maze[][];
+    protected Cell[][] maze;
     protected Stack<Cell> stackToPublish;
     protected Queue<Cell> queueToPublish;
     protected Set<Cell> setToPublish;
@@ -22,6 +22,8 @@ public abstract class MazeGenerator {
     protected float cellHeight;
     protected int originX = 0;
     protected int originY = 0;
+    protected int startXi = 0;
+    protected int startYi = 0;
 
     private MazeGenerator(int cols, int rows) {
         maze = new Cell[cols][rows];
@@ -36,10 +38,16 @@ public abstract class MazeGenerator {
         cellHeight = (float) height / (float) rows;
     }
 
-    public MazeGenerator(int cols, int rows, int width, int height, int originX, int originY){
-        this(cols,rows,width,height);
+    public MazeGenerator(int cols, int rows, int width, int height, int originX, int originY) {
+        this(cols, rows, width, height);
         this.originX = originX;
         this.originY = originY;
+    }
+
+    public MazeGenerator(int cols, int rows, int width, int height, int originX, int originY, int startXi, int startYi) {
+        this(cols, rows, width, height, originX, originY);
+        this.startXi = startXi;
+        this.startYi = startYi;
     }
 
     protected void processCell(Cell cell) {
@@ -79,27 +87,35 @@ public abstract class MazeGenerator {
         initialCell = Utils.getRandomCellFromMaze(maze);
     }
 
-    public void initialCellAtTop(boolean left) {
-        if (left)
-            initialCell = maze[0][maze[0].length - 1];
-        else
-            finalCellAtEnd();
+    public void initialCellAtTopLeft() {
+        initialCell = maze[0][maze[0].length - 1];
     }
 
-    public void finalCellAtRandom() {
-        finalCell = Utils.getRandomCellFromMaze(maze);
+    public void initialCellAtTopRight() {
+        initialCell = maze[maze.length - 1][maze[0].length - 1];
     }
 
-    public void finalCellAtUniqueRandom() {
-        finalCell = Utils.getRandomUniqueCellFromMaze(initialCell, maze);
-    }
-
-    public void initialCellAtStart() {
+    public void initialCellAtBottomLeft() {
         initialCell = maze[0][0];
     }
 
-    public void finalCellAtEnd() {
-        finalCell = maze[maze.length - 1][maze[0].length - 1];
+    public void initialCellAtBottomRight() {
+        initialCell = maze[0][maze[0].length - 1];
+    }
+
+    public void finalCellAtUniqueRandom(boolean uniqueFromInitial) {
+        if (uniqueFromInitial)
+            finalCell = Utils.getRandomUniqueCellFromMaze(initialCell, maze);
+        else
+            finalCell = Utils.getRandomCellFromMaze(maze);
+    }
+
+    public void finalCellAt(int xi, int yi) {
+        if (xi < 0) finalCell = maze[0][0];
+        else if (xi > maze[0].length - 1) finalCell = maze[0][maze[0].length - 1];
+        else if (yi < 0) finalCell = maze[0][0];
+        else if (yi > maze.length - 1) finalCell = maze[maze.length - 1][0];
+        else finalCell = maze[xi][yi];
     }
 
     public Cell[][] getMaze() {

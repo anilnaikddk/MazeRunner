@@ -9,9 +9,9 @@ import com.badlogic.gdx.utils.Disposable;
 public class MazeDrawer extends Actor implements Disposable {
 
     private ShapeRenderer shapeRenderer;
-    private Cell maze[][];
+    private Cell[][] maze;
 
-    public MazeDrawer(Cell maze[][]) {
+    public MazeDrawer(Cell[][] maze) {
         this.maze = maze;
         shapeRenderer = new ShapeRenderer();
         Gdx.gl.glLineWidth(1.5f);

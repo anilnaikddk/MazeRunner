@@ -8,7 +8,7 @@ public class Constants {
 
     public static final String gameTitle = "The Maze Runner";
     public static float moveTime = 0.15f;
-    public static float initialFactor = 5f;
+    public static float initialFactor = 10f;
     public static boolean flipY = false;
 
     public static final int DESKTOP_WIDTH = 1080 / 3;
@@ -17,7 +17,7 @@ public class Constants {
     public static final int WIDTH = Gdx.graphics.getWidth();
     public static final int HEIGHT = Gdx.graphics.getHeight();
 
-    private static DirPair directions[] = new DirPair[]{
+    private static DirPair[] directions = new DirPair[]{
             new DirPair("left", 180f),
             new DirPair("up", 90f),
             new DirPair("right", 0f),

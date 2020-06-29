@@ -4,10 +4,12 @@ import com.akn.game.generator.MazeGenerator;
 import com.akn.game.generator.PathFinder;
 import com.akn.game.generator.RecursiveBacktrackingUsingStack;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.GridPoint2;
 import com.badlogic.gdx.utils.Disposable;
 
 public class Level implements Disposable {
 
+    private enum CellPos {TopLeft, TopRight, BottomLeft, BottomRight,Default}
     private int ROWS;
     private int COLS;
     private int SCALE;
@@ -30,16 +32,27 @@ public class Level implements Disposable {
         width = COLS * SCALE;
         height = ROWS * SCALE;
 
-        mazeGenerator = new RecursiveBacktrackingUsingStack(COLS, ROWS, WIDTH, HEIGHT, originX, originY);
+        GridPoint2 startXY = startXY(CellPos.BottomLeft);
+        mazeGenerator = new RecursiveBacktrackingUsingStack(COLS, ROWS, WIDTH, HEIGHT, originX, originY,startXY.x,startXY.y);
         mazeGenerator.generateMaze();
         maze = mazeGenerator.getMaze();
-        pathFinder = new PathFinder(mazeGenerator.getTraversalQueue());
+        pathFinder = new PathFinder(mazeGenerator.getMaze());
 
-        mazeGenerator.initialCellAtTop(true);
-        mazeGenerator.setFinalCell(pathFinder.getLongestPathCellFrom(mazeGenerator.getInitialCell(), maze));
+        mazeGenerator.initialCellAtTopLeft();
+        mazeGenerator.setFinalCell(pathFinder.longestPathCell(mazeGenerator.getInitialCell()));
         destination = new Destination(mazeGenerator.getFinalCell());
         player = new Player(mazeGenerator.getInitialCell(), characterName, destination, maze);
         mazeDrawer = new MazeDrawer(maze);
+
+//        new Thread(() -> pathFinder.longestPathCell(mazeGenerator.getInitialCell())).start();
+    }
+
+    private GridPoint2 startXY(CellPos cellPos){
+        if(cellPos == CellPos.TopLeft) return new GridPoint2(0, ROWS - 1);
+        if(cellPos == CellPos.TopRight) return new GridPoint2(COLS-1, ROWS - 1);
+        if(cellPos == CellPos.BottomLeft) return new GridPoint2(0, 0);
+        if(cellPos == CellPos.BottomRight) return new GridPoint2(COLS-1, 0);
+        return new GridPoint2(0, 0);
     }
 
     public Player getPlayer() {

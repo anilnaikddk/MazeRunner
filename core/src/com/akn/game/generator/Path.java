@@ -2,29 +2,41 @@ package com.akn.game.generator;
 
 import com.akn.game.entities.Cell;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.Stack;
 
 
-public class Path extends ArrayList<Cell> {
+public class Path extends ArrayList<Cell> implements Comparable<Path> {
 
-	public Path(){
+    public Path() {
 
-	}
+    }
 
-	public Path(Cell cell){
-		add(cell);
-	}
+    public Path(Stack<Cell> stack) {
+        addAll(stack);
+    }
 
-	public Path(Path path){
-		addAll(path);
-	}
+    public Path(Cell cell) {
+        add(cell);
+    }
 
-	public Optional<Cell> last() {
-		return Optional.ofNullable(get(size() - 1));
-	}
+    public Path(Path path) {
+        addAll(path);
+    }
 
-	//	public int length;
+    public Cell last() {
+        return get(size() - 1);
+    }
+
+    @Override
+    public int compareTo(@NotNull Path path) {
+        return size() - path.size();
+    }
+
+
+    //	public int length;
 //	private ArrayList<Cell> cellList;
 //
 //	public Path() {

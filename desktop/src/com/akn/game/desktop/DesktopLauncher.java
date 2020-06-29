@@ -12,6 +12,5 @@ public class DesktopLauncher {
 		config.height = Constants.DESKTOP_HEIGHT;
 //		config.resizable = false;
 		new LwjglApplication(new Main(), config);
-//		new LwjglApplication(new AnimationTest(), config);
 	}
 }

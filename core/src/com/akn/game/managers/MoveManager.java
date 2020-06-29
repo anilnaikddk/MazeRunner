@@ -106,10 +106,7 @@ public class MoveManager {
         if (dir == UP && !player.getCell().UP_WALL) {
             return true;
         }
-        if (dir == DOWN && !player.getCell().DOWN_WALL) {
-            return true;
-        }
-        return false;
+        return dir == DOWN && !player.getCell().DOWN_WALL;
     }
 
     private int nextMove(int move) {

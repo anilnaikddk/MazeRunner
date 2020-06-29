@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.Disposable;
 public class AnimationManager implements Disposable {
 
     private TextureAtlas atlas;
-    private Animation<Sprite> ballAnimations[];
-    private Animation<Sprite> bunnyAnimations[];
+    private Animation<Sprite>[] ballAnimations;
+    private Animation<Sprite>[] bunnyAnimations;
     private float timePassed = 0;
     private float animSpeed = 19f / 5f;
 
